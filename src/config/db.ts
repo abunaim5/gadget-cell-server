@@ -26,4 +26,4 @@ export async function connectDB() {
 }
 connectDB().catch(console.dir);
 
-export const db = client.db();
+export const db = client.db('gadgetCellDB');
