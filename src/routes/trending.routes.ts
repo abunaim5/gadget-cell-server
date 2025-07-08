@@ -7,8 +7,16 @@ const productCollection = db.collection('products');
 
 router.get('/', async (req: Request, res: Response) => {
     try {
-        const products = await productCollection.find().toArray();
-        res.send(products);
+        const query = {};
+        const options = {
+            limit: 8,
+            sort: {
+                ratings: -1
+            }
+        };
+
+        const trendingProducts = await productCollection.find(query, options).toArray();
+        res.send(trendingProducts);
     } catch (err) {
         console.error(err);
     }

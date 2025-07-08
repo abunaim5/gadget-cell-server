@@ -1,6 +1,7 @@
 import { connectDB } from "./config/db";
 import { Request, Response } from "express";
 import productRoutes from './routes/product.routes'
+import trendingRoutes from './routes/trending.routes'
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
@@ -12,6 +13,7 @@ app.use(express.json());
 app.use(cors());
 
 app.use('/products', productRoutes);
+app.use('/trending', trendingRoutes);
 
 app.get('/', (req: Request, res: Response) => {
     res.send('GadgetCell server is running.');
