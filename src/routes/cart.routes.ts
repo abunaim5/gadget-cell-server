@@ -13,11 +13,20 @@ type CartProductListType = {
     image: string;
     description: string;
     price: number;
-    oldPrice: number;
+    old_price: number;
     category: string;
     ratings: number;
     createdAt: string;
 }
+
+router.get('/', async (req: Request, res: Response) => {
+    try {
+        const cartProducts = await cartCollection.find().toArray();
+        res.send(cartProducts);
+    } catch (err) {
+        console.error(err);
+    }
+});
 
 router.post('/', async (req: Request, res: Response): Promise<void> => {
     try {
