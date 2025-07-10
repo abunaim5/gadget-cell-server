@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { Router } from "express";
 import { db } from "../config/db";
+import { ObjectId } from "mongodb";
 // import { ObjectId } from "mongodb";
 
 const router = Router();
@@ -44,6 +45,20 @@ router.post('/', async (req: Request, res: Response): Promise<void> => {
     } catch (err) {
         console.error(err);
         res.status(500).json({ message: 'Server error' });
+    }
+});
+
+router.delete('/:id', async (req: Request, res: Response) => {
+    try {
+        const id = req.params.id;
+        const query = {
+            _id: new ObjectId(id)
+        };
+
+        await cartCollection.deleteOne(query);
+        res.status(200).json({ message: 'Successfully deleted' });
+    } catch (err) {
+        console.error(err);
     }
 });
 
